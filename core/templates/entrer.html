@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription - T.T.G Network</title>
+
+  <!-- Bootstrap & Icônes -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+  <style>
+    body {
+      background-image: url("{% static 'images/bg.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .register-box {
+      background-color: rgba(255, 255, 255, 0.97);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .register-box h2 {
+      font-weight: 600;
+      color: #0d6efd;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-control {
+      border-radius: 10px;
+    }
+
+    .btn-primary {
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    .form-select {
+      border-radius: 10px;
+    }
+
+    .small-text {
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Créer un compte</h2>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST" novalidate>
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="id_nom" class="form-label">Nom complet</label>
+        <input type="text" name="first_name" class="form-control" id="id_nom" placeholder="Ex: Jean Mbemba" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_email" class="form-label">Adresse email</label>
+        <input type="email" name="email" class="form-control" id="id_email" placeholder="exemple@ttg.com" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_password1" class="form-label">Mot de passe</label>
+        <input type="password" name="password1" class="form-control" id="id_password1" placeholder="********" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_password2" class="form-label">Confirmation mot de passe</label>
+        <input type="password" name="password2" class="form-control" id="id_password2" placeholder="********" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_role" class="form-label">Statut</label>
+        <select name="role" class="form-select" id="id_role" required>
+          <option selected disabled>Choisissez un rôle</option>
+          <option value="etudiant">Étudiant</option>
+          <option value="parent">Parent</option>
+          <option value="formateur">Formateur</option>
+        </select>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">S’inscrire</button>
+      </div>
+    </form>
+
+    <p class="small-text mt-3">Déjà inscrit ? <a href="{% url 'connexion' %}">Connectez-vous ici</a></p>
+  </div>
+
+  <!-- JS Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

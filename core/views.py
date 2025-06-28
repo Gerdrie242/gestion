@@ -333,6 +333,7 @@ def modifier(request,pk):
     return render(request, 'modifier.html')
 
     
+
 def entrer(request): 
     if request.method == 'POST': 
         nom = request.POST.get('nom') 
